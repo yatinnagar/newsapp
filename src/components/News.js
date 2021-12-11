@@ -19,10 +19,10 @@ const News=(props)=> {
         props.setProgress(0);
      
        const url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${ page}&pageSize=${props.pageSize}`;
-       props.setProgress(20);
+       props.setProgress(65);
        setLoading(true)
         let data=await fetch(url);
-        props.setProgress(35);
+        props.setProgress(67);
         let parsedData=await data.json();
         props.setProgress(70);
         setArticles(parsedData.articles);
@@ -57,7 +57,7 @@ const News=(props)=> {
             loader={<Spinner/>}
           >
          <div className="container" style={{    marginTop: "65px"}}>
-               <h1 className="text-center my-3" >NewsMate - {props.category==="general"?"Top Headlines":props.category.charAt(0).toUpperCase() + props.category.slice(1)} </h1>
+               <h1 className="text-center my-3" style={{color : props.Dmode?'white':'black' }} >NewsMate - {props.category==="general"?"Top Headlines":props.category.charAt(0).toUpperCase() + props.category.slice(1)} </h1>
          {  loading &&  <Spinner/>}
                <div className="row">
                { articles.map((element)=>{

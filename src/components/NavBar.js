@@ -1,11 +1,11 @@
 import React from 'react'
 import NewsMateLogo from './NewsMateLogo.png'
 import {Link} from "react-router-dom";
-const NavBar=()=>{
-  
+const NavBar=(props)=>{
+
         return (
             <div>
-                <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+                <nav className={`"navbar fixed-top navbar-expand-lg navbar-${props.Dmode?'dark':'light'} bg-${props.Dmode?'dark':'light'}`}>
   <div className="container-fluid">
   <img src={NewsMateLogo} alt="" width="30" height="24" className="d-inline-block align-text-top"/>
     <Link className="navbar-brand" to="/">NewsMate</Link>
@@ -34,6 +34,10 @@ const NavBar=()=>{
           <Link className="nav-link" to="/technology">Technology</Link></li>
 
       </ul>
+      <div className="form-check form-switch">
+  <input className="form-check-input"onClick={props.changeMode} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+  <label className="form-check-label" style={{color : props.Dmode?'white':'black' }} htmlFor="flexSwitchCheckDefault">Switch Mode ( Light / Dark )</label>
+</div>
      
     </div>
   </div>
@@ -42,5 +46,12 @@ const NavBar=()=>{
         )
     
 }
-
+// NavBar.defaultProps={
+//   country : "in",
+//   pageSize: 9
+// }
+// NavBar.propsTypes={
+// country : PropTypes.string,
+//   pageSize: PropTypes.number
+// }
 export default NavBar
