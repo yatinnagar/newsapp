@@ -12,12 +12,12 @@ const News=(props)=> {
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true)
     const [totalresults, setTotalResults] = useState(0)
-    // document.title=`${props.category==="general"?"Top Headlines":props.category.charAt(0).toUpperCase() + props.category.slice(1)} - NewsMate`;
+    
     
     
     const updateNews=async()=>{
         props.setProgress(0);
-     
+        document.title=`${props.category==="general"?"Top Headlines":props.category.charAt(0).toUpperCase() + props.category.slice(1)} - NewsMate`;
        const url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${ page}&pageSize=${props.pageSize}`;
        props.setProgress(65);
        setLoading(true)
@@ -28,7 +28,7 @@ const News=(props)=> {
         setArticles(parsedData.articles);
         setTotalResults(parsedData.totalResults)
        setLoading(false)
-        console.log(parsedData);
+       
         props.setProgress(100);
     }
    const fetchMoreData = async () => {
@@ -61,8 +61,8 @@ const News=(props)=> {
          {  loading &&  <Spinner/>}
                <div className="row">
                { articles.map((element)=>{
-                   return <div className="col-md-4" key={element.url}>
-                   <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage? element.urlToImage :{NewsMateLogo}} newsUrl={element.url} source={element.source.name} author={element.author?element.author:"Unknown"}date={element.publishedAt}/>
+                   return <div className="col-12 my-3" key={element.url}>
+                   <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage? element.urlToImage :NewsMateLogo} newsUrl={element.url} source={element.source.name} author={element.author?element.author:"Unknown"}date={element.publishedAt} Dmode={props.Dmode} />
                </div>
                })}
                         
@@ -70,11 +70,6 @@ const News=(props)=> {
                 </div>
                  
           </InfiniteScroll>
-             {/* {! loading &&<div className="container d-flex justify-content-between">
-             <button disabled={ page<=1} type="button" className="btn btn-primary" onClick={this.handlePrevClick}> &larr; Previous</button>
-             <button disabled={1} type="button" className="btn btn-primary">Page No. <span className="badge bg-secondary">{ page}</span></button>
-             <button disabled={ page +1 > Math.ceil( totalResults/props.pageSize)} type="button" className="btn btn-primary" onClick={this.handleNextClick}>Next &rarr; </button>
-             </div>} */}
          </>
         )
     

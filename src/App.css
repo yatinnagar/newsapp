@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+@media (min-width:480px){
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;}
+} 
 
 .App-logo {
   height: 40vmin;
